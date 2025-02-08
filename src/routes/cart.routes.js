@@ -33,7 +33,7 @@ cartRouter.get("/:pid", async (req, res) => {
     }
 })
 
-cartRouter.post('/:cid/product/:pid', async (req, res) => {
+cartRouter.post('/:cid/products/:pid', async (req, res) => {
     const { cid, pid } = req.params
 
     try {
@@ -42,7 +42,7 @@ cartRouter.post('/:cid/product/:pid', async (req, res) => {
             console.error(result.error);
             return res.status(404).send({ message: result.error });
         }
-        res.status(201).send(result);
+        res.status(201).send("Succes to add product to cart");
     } catch (error) {
         res.status(500).send({ message: `${error.message}` });
     }

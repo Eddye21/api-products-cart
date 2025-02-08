@@ -12,7 +12,7 @@ productRouter.get("/", async(req, res) => {
     
         res.status(200).send(products)
     } catch (error) {
-        res.status(400).send(error)
+        res.status(500).send({message: "Error to get products"})
     }
 
 })
@@ -29,12 +29,11 @@ productRouter.get("/:pid", async (req, res) => {
         res.status(200).send(productId);
         
     } catch (error) {
-        res.status(400).send("Error to get item")
+        res.status(500).send({message: "Error to get item"})
     }
 })
 
 productRouter.post("/", async(req, res) => {
-    
     try {
         const productsAgred = req.body
     
@@ -43,7 +42,7 @@ productRouter.post("/", async(req, res) => {
         res.status(201).json(add)
         
     } catch (error) {
-        throw new Error(`Error to consult product : ${error} `)
+        res.status(500).send({message: `Error to post new products ${error}`})
     }
     
 })
@@ -57,23 +56,23 @@ productRouter.put("/:pid", async(req, res) => {
         
         if(!update){
             return res.status(400).send({message: "Error id not available"})}
+        res.status(201).send(update)
         
     } catch (error) {
-        res.status(400).send("Error to edit item")
+        res.status(500).send({message: "Error to edit item"})
     }
-    res.status(201).send(update)
 })
 
 productRouter.delete("/:pid", async(req, res) => {
+    const pid = parseInt(req.params.pid)
+    const productDelete = await productManager.deleteProductById(pid)
 
+    res.status(201).send({message: "Succes to delete item"})
+
+    
     try {
-        const pid = req.params.pid
-        await productManager.deleteProductById(pid)
-        
-        res.status(201).send({message: "Succes, delete item"})
-        
     } catch (error) {
-        res.status(400).send("Error to delete item")
+        res.status(500).send({message: "Error to delete item"})
     }
 })
 
