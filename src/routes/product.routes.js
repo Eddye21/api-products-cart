@@ -14,7 +14,6 @@ productRouter.get("/", async(req, res) => {
     } catch (error) {
         res.status(500).send({message: "Error to get products"})
     }
-
 })
 
 productRouter.get("/:pid", async (req, res) => {
@@ -64,13 +63,16 @@ productRouter.put("/:pid", async(req, res) => {
 })
 
 productRouter.delete("/:pid", async(req, res) => {
-    const pid = parseInt(req.params.pid)
-    const productDelete = await productManager.deleteProductById(pid)
-
-    res.status(201).send({message: "Succes to delete item"})
-
-    
     try {
+        const pid = parseInt(req.params.pid)
+        const productDelete = await productManager.deleteProductById(pid)
+
+        if (productDelete) { 
+            res.status(200).send({ message: "Success to delete item" })
+        } else {
+            res.status(404).send({ message: "Product not found" })
+        }
+
     } catch (error) {
         res.status(500).send({message: "Error to delete item"})
     }

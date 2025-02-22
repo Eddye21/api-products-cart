@@ -1,19 +1,9 @@
 [
-  {
-    "title": "Teclado",
-    "description": "Tecnologia",
-    "price": 200,
-    "thumbnail": "",
-    "code": "Alm13",
-    "stock": 7,
-    "status": true,
-    "id": 27
-  },
     {
         "title": "laptop",
         "description": "entretenimiento",
         "thumbnail": "ruta1",
-        "price": 800,
+        "price": 200,
         "code": "acl13",
         "stock": 0,
         "status": false,
@@ -22,7 +12,7 @@
     {
         "title": "Mouse",
         "description": "Tecnologia",
-        "price": 100,
+        "price": 200,
         "thumbnail": "",
         "code": "Alm13",
         "stock": 1,
